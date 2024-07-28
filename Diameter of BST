@@ -1,0 +1,124 @@
+//Diameter of BST
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class BinarySearchTree {
+    int data;
+    BinarySearchTree left;
+    BinarySearchTree right;
+
+    BinarySearchTree(int d){
+        data=d;
+        left=null;
+        right=null;
+    }
+    public static BinarySearchTree insert(BinarySearchTree root,int ele){
+        if(root==null){
+            BinarySearchTree newnode=new BinarySearchTree(ele);
+            return newnode;
+        }
+        if(root.data>=ele)
+            root.left=insert(root.left,ele);
+        else{
+            root.right=insert(root.right,ele);
+        }
+        return root;
+    }
+    static void LevelOrderTraversal(BinarySearchTree temp){
+        Queue<BinarySearchTree> q=new LinkedList<>();
+        q.add(temp);
+        while(!q.isEmpty()){
+            BinarySearchTree curr=q.poll();
+            System.out.print(curr.data+" ");
+
+            if(curr.left!=null)
+                q.add(curr.left);
+            if(curr.right!=null)
+                q.add(curr.right);
+        }
+    }
+    public static void Inorder(BinarySearchTree temp){
+        if(temp==null)
+            return;
+        Inorder(temp.left);
+        System.out.print(temp.data+" ");
+        Inorder(temp.right);
+    }
+    public static void Preorder(BinarySearchTree temp){
+        if(temp==null)
+            return;
+        System.out.print(temp.data+" ");
+        Preorder(temp.left);
+        Preorder(temp.right);
+    }
+    public static void Postorder(BinarySearchTree temp){
+        if(temp==null)
+            return;
+        Postorder(temp.left);
+        Postorder(temp.right);
+        System.out.print(temp.data+" ");
+    }
+    public static int Height(BinarySearchTree root){
+        if(root==null)
+            return 0;
+        else{
+            int rh=Height(root.right);
+            int lh=Height(root.left);
+            return Math.max(rh,lh)+1;
+        }
+    }
+    public static int diameter(BinarySearchTree n){
+        if(n==null)
+            return 0;
+        int lh=Height(n.left);
+        int rh=Height(n.right);
+        int dt=lh+rh+1;
+        int ld=diameter(n.left);
+        int rd=diameter(n.right);
+        return Math.max(dt,Math.max(ld,rd));
+
+    }
+    public static int sumofleaf(BinarySearchTree root){
+        if(root==null){
+            return 0;
+        }
+        else{
+            if(root.left==null&&root.right==null){
+                return root.data;
+            }
+            else{
+                return sumofleaf(root.left)+sumofleaf(root.right);
+            }
+        }
+    }
+    public static void main(String args[]){
+        System.out.println("Name:Vasamsetti Sai Subhash\nRollno:21BF1A3759");
+        BinarySearchTree root=new BinarySearchTree(7);
+        insert(root,18);
+        insert(root,45);
+        insert(root,1);
+        insert(root,17);
+        insert(root,333);
+        insert(root,69);
+        insert(root,16);
+        insert(root,41);
+        insert(root,77);
+        insert(root,3);
+        insert(root,8);
+        insert(root,25);
+        System.out.println("Level order :");
+        LevelOrderTraversal(root);
+        System.out.println("\nInorder :");
+        Inorder(root);
+        System.out.println("\nPreorder :");
+        Preorder(root);
+        System.out.println("\nPostorder :");
+        Postorder(root);
+        System.out.println();
+        System.out.println(Height(root));
+        System.out.println(diameter(root));
+
+        System.out.println();
+        System.out.println(sumofleaf(root));
+    }
+}

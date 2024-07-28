@@ -1,0 +1,39 @@
+//Graph Adjacency matrix
+class Graphadjacencymatrix{
+    private int v;
+    private int e;
+    private int adjmat[][];
+    public Graphadjacencymatrix(int nodes){
+        v=nodes;
+        e=0;
+        adjmat=new int[nodes][nodes];
+    }
+    public void addedge(int x,int y) {
+        adjmat[x][y] = 1;
+        adjmat[y][x] = 1;
+        e++;
+    }
+    public void printAdjmatrix(){
+        System.out.println("Adjecency Matrix:");
+        for(int i=0;i<v;i++){
+            for(int j=0;j<v;j++){
+                System.out.print(adjmat[i][j]+" ");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("Graph consists of "+v+" vertices and "+e+" edges");
+    }
+}
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("Name : Vasamsetti Sai Subhash\nRollno : 21BF1A3759");
+        Graphadjacencymatrix graph=new Graphadjacencymatrix(4);
+        graph.addedge(0,1);
+        graph.addedge(1,2);
+        graph.addedge(2,3);
+        graph.addedge(3,0);
+
+        graph.printAdjmatrix();
+    }
+}

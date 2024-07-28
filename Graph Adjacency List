@@ -1,0 +1,44 @@
+//Graph Adjacency List
+import java.util.LinkedList;
+
+class Graphadjacencylist{
+    private int v;
+    private int e;
+    private LinkedList<Integer>[] adj;
+    public Graphadjacencylist(int nodes){
+        v=nodes;
+        e=0;
+        adj=new LinkedList[nodes];
+        for(int i=0;i<nodes;i++){
+            adj[i]=new LinkedList<>();
+        }
+    }
+    public void addedge(int x,int y) {
+        adj[x].add(y);
+        adj[y].add(x);
+        e++;
+    }
+    public void printAdjlist(){
+        System.out.println("Adjecency List:");
+        for(int i=0;i<v;i++){
+            System.out.print(i+"->");
+            for(int j:adj[i]){
+                System.out.print(adj[j]);
+            }
+            System.out.print("\n");
+        }
+    }
+}
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println("Name : Vasamsetti Sai Subhash\nRollno : 21BF1A3759");
+        Graphadjacencylist graph=new Graphadjacencylist(4);
+        graph.addedge(0,1);
+        graph.addedge(1,2);
+        graph.addedge(2,3);
+        graph.addedge(3,0);
+
+        graph.printAdjlist();
+    }
+}

@@ -1,0 +1,58 @@
+//NODE SIBLINGS
+import java.util.*;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int d) {
+        data = d;
+        left = right = null;
+    }
+}
+
+public class BT {
+    static Node head;
+    static void createBinaryTree(Scanner sc) {
+        System.out.println("Enter the root node value: ");
+        int val = sc.nextInt();
+        if (val == -1)
+            return
+                    head = new Node(val);
+        Queue<Node> q = new LinkedList<>();
+        q.add(head);
+        while (!q.isEmpty()) {
+            Node temp = q.poll();
+            val = sc.nextInt();
+            if (val != -1) {
+                temp.left = new Node(val);
+                q.add(temp.left);
+            }
+            val = sc.nextInt();
+            if (val != -1) {
+                temp.right = new Node(val);
+                q.add(temp.right);
+            }
+        }
+    }
+    static void printNodesWithoutSiblings(Node node){
+        if (node == null) {
+            return;
+        }
+        if (node.left != null && node.right == null) {
+            System.out.println(node.left.data);
+        } else if (node.right != null && node.left == null) {
+            System.out.println(node.right.data);
+        }
+        printNodesWithoutSiblings(node.left);
+        printNodesWithoutSiblings(node.right);
+    }
+    public static void main(String[] args) {
+        System.out.println("Name:Vasamsetti Sai Subhash\nRollno:21BF1A3759");
+        Scanner sc = new Scanner(System.in);
+        createBinaryTree(sc);
+        System.out.println("Nodes without siblings:");
+        printNodesWithoutSiblings(head);
+        sc.close();
+    }
+}
